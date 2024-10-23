@@ -18,3 +18,11 @@ html {
   --primary-color: #5a97e0;
   --white: #ffffff;
 }
+
+#password.error {
+    background-color: red;
+}
+
+#password.valid {
+    background-color: var(--background-color-button);
+}
