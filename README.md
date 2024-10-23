@@ -2,7 +2,25 @@
 
 This is an example of a solution to the exercise [Account Registration](https://github.com/jensen-frontend-2024/exercise-js-account-registration). The solution is made at Oktober 23 2024 by Niklas Fähnrich.
 
+<details>
+<summary>Table of content</summary>
+
+3. [Connect labels to inputs without using the "for" attribute](#3-connect-labels-to-inputs-without-using-the-for-attribute)
+
+4. [Make every input mandatory](#4-make-every-input-mandatory)
+
+5. [Validate the password, it must contain atleast 8 characters.](#5-validate-the-password-it-must-contain-atleast-8-characters)
+
+6. [Validate the confirmPassowrd, must be identical to password](#6-validate-the-confirmpassowrd-must-be-identical-to-password)
+
+7. [Make sure submit is disabled if the passwords are not valid.](#7-make-sure-submit-is-disabled-if-the-passwords-are-not-valid)
+
+8. [Gather all the data from the inputs and log as an object.](#8-gather-all-the-data-from-the-inputs-and-log-as-an-object)
+</details>
+
 Down below is a walkthroug of all the steps.
+
+Exercise 1 and 2 are straight forward so they are not included in this walk through.
 
 ### 3. Connect labels to inputs without using the "for" attribute
 
@@ -85,6 +103,10 @@ form.addEventListener("click", function (event) {
   input.focus();
 });
 ```
+
+[Back to top](#account-registration-solution)
+
+---
 
 ### 4. Make every input mandatory.
 
@@ -214,6 +236,10 @@ form.addEventListener("input", function (event) {
 
 A little bit neater.
 
+[Back to top](#account-registration-solution)
+
+---
+
 ### 5. Validate the password, it must contain atleast 8 characters.
 
 In order to validate the password of the pasword input we need to check it the value of that input is 8 characters or longer. First step is to create a reference to that input, it's done at the top of the file with the other element references.
@@ -292,6 +318,10 @@ form.addEventListener("input", function (event) {
 
 The id and value variables are just derived from the event object.
 
+[Back to top](#account-registration-solution)
+
+---
+
 ### 6. Validate the confirmPassowrd, must be identical to password
 
 Okay, let' validate the next password input that is the confirm password. The validation is simplier here, since we just need to check of the confirm password is equal to the password. Let's create a function for that:
@@ -357,6 +387,10 @@ form.addEventListener("input", function (event) {
 
 Works like a charm.
 
+[Back to top](#account-registration-solution)
+
+---
+
 ### 7. Make sure submit is disabled if the passwords are not valid.
 
 Okay, this one is fairly straight forward, we just need to add to the existing check where we check if all the inputs have value that is not an empty string. To keep the code fairly readable, we can create a boolean that is derived from the two password checks functions.
@@ -407,6 +441,10 @@ form.addEventListener("input", function (event) {
 });
 ```
 
+[Back to top](#account-registration-solution)
+
+---
+
 ### 8. Gather all the data from the inputs and log as an object.
 
 The last one. In order to do this we need references to all the inputs, let's create that at the top.
@@ -453,3 +491,7 @@ form.addEventListener("submit", function (event) {
 ```
 
 There you go! Last step is just to add some nice css to your account registration form, but that you will have to do on your own!
+
+[Back to top](#account-registration-solution)
+
+---
