@@ -1,7 +1,11 @@
 // Create references that we need in this exercise
 const form = document.querySelector(".form");
 const button = document.querySelector(".button");
-const password = document.querySelector("#password");
+const passwordInput = document.querySelector("#password");
+const confirmPasswordInput = document.querySelector("#confirm-password");
+const nameInput = document.querySelector("#name");
+const usernameInput = document.querySelector("#username");
+const emailInput = document.querySelector("#email");
 
 // 3. Connect label to corresponding input
 form.addEventListener("click", function (event) {
@@ -40,6 +44,64 @@ form.addEventListener("click", function (event) {
 
 // 5. Validate the password, it must containt atleast 8 characters.
 
+// form.addEventListener("input", function (event) {
+//   const id = event.target.id;
+//   const value = event.target.value;
+//   const allInputsHaveValue = checkIfAllInputsHaveValue();
+
+//   if (id === "password") {
+//     const passwordIsValid = checkIfPasswordIsValid(value);
+
+//     if (passwordIsValid) {
+//       setPwdValidationStyling("valid");
+//     } else {
+//       setPwdValidationStyling("error");
+//     }
+//   }
+
+//   if (allInputsHaveValue) {
+//     button.removeAttribute("disabled");
+//   } else {
+//     button.setAttribute("disabled", true);
+//   }
+// });
+
+// 6. Validate the confirmPassowrd, must be identical to password
+
+// form.addEventListener("input", function (event) {
+//   const id = event.target.id;
+//   const value = event.target.value;
+//   const allInputsHaveValue = checkIfAllInputsHaveValue();
+
+//   if (id === "password") {
+//     const passwordIsValid = checkIfPasswordIsValid(value);
+
+//     if (passwordIsValid) {
+//       setPwdValidationStyling("valid", passwordInput);
+//     } else {
+//       setPwdValidationStyling("error", passwordInput);
+//     }
+//   }
+
+//   if (id === "confirm-password") {
+//     const confirmPasswordIsValid = checkIfConfirmPasswordIsValid();
+
+//     if (confirmPasswordIsValid) {
+//       setPwdValidationStyling("valid", confirmPasswordInput);
+//     } else {
+//       setPwdValidationStyling("error", confirmPasswordInput);
+//     }
+//   }
+
+//   if (allInputsHaveValue) {
+//     button.removeAttribute("disabled");
+//   } else {
+//     button.setAttribute("disabled", true);
+//   }
+// });
+
+// 7. Make sure submit is disabled if the passwords are not valid.
+
 form.addEventListener("input", function (event) {
   const id = event.target.id;
   const value = event.target.value;
@@ -49,17 +111,47 @@ form.addEventListener("input", function (event) {
     const passwordIsValid = checkIfPasswordIsValid(value);
 
     if (passwordIsValid) {
-      setPwdValidationStyling("valid");
+      setPwdValidationStyling("valid", passwordInput);
     } else {
-      setPwdValidationStyling("error");
+      setPwdValidationStyling("error", passwordInput);
     }
   }
 
-  if (allInputsHaveValue) {
+  if (id === "confirm-password") {
+    const confirmPasswordIsValid = checkIfConfirmPasswordIsValid();
+
+    if (confirmPasswordIsValid) {
+      setPwdValidationStyling("valid", confirmPasswordInput);
+    } else {
+      setPwdValidationStyling("error", confirmPasswordInput);
+    }
+  }
+
+  const bothPasswordsAreValid =
+    checkIfPasswordIsValid(value) && checkIfConfirmPasswordIsValid();
+
+  if (allInputsHaveValue && bothPasswordsAreValid) {
     button.removeAttribute("disabled");
   } else {
     button.setAttribute("disabled", true);
   }
+});
+
+// 8. Gather all the data from the inputs and log as an object.
+
+form.addEventListener("submit", function (event) {
+  console.log("form submitted");
+  event.preventDefault();
+
+  const data = {
+    name: nameInput.value,
+    username: usernameInput.value,
+    email: emailInput.value,
+    password: passwordInput.value,
+    confirmPassword: confirmPasswordInput.value,
+  };
+
+  console.log(data);
 });
 
 // ########## Utility functions below ########## //
@@ -84,12 +176,17 @@ function checkIfPasswordIsValid(passwordValue) {
   return false;
 }
 
-function setPwdValidationStyling(value) {
+function setPwdValidationStyling(value, element) {
   if (value === "valid") {
-    password.classList.add("valid");
-    password.classList.remove("error");
+    element.classList.add("valid");
+    element.classList.remove("error");
   } else if (value === "error") {
-    password.classList.remove("valid");
-    password.classList.add("error");
+    element.classList.remove("valid");
+    element.classList.add("error");
   }
+}
+
+function checkIfConfirmPasswordIsValid() {
+  const passwordValue = passwordInput.value;
+  return confirmPasswordInput.value === passwordValue;
 }

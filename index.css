@@ -10,7 +10,7 @@
 
 /* html and :root is the same thing, so you can use either. */
 html {
-    /* Below is something called css-variables, they are reuseble throughout the application. These variables don't just have to be colors, they can be anything really, standard border radius for example. The importan thing is that they need to be defined inside the html-selector. */
+  /* Below is something called css-variables, they are reuseble throughout the application. These variables don't just have to be colors, they can be anything really, standard border radius for example. The importan thing is that they need to be defined inside the html-selector. */
   --background-color-dark: #111827;
   --background-color-light: #1f2937;
   --background-color-input: #374151;
@@ -19,10 +19,12 @@ html {
   --white: #ffffff;
 }
 
-#password.error {
-    background-color: red;
+#password.error,
+#confirm-password.error {
+  background-color: red;
 }
 
-#password.valid {
-    background-color: var(--background-color-button);
+#password.valid,
+#confirm-password.valid {
+  background-color: var(--background-color-button);
 }

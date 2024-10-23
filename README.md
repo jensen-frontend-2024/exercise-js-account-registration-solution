@@ -122,7 +122,6 @@ Let's collect our thoughts here. We want to enable the submit button sometime, h
 In that case we need a reference to all the input fields.
 
 ```js
-
 form.addEventListener("input", function (event) {
   const inputs = form.querySelectorAll("input");
   console.log(inputs);
@@ -155,6 +154,64 @@ form.addEventListener("input", function (event) {
 });
 ```
 
-Here we will console.log a text whether or not all inputs have values.
+Here we just console.log a text whether or not all inputs have values.
 
 What we want to do instead is to manipulate the attribute `disabled` on the button element, and to our help we have the methods: `removeAttribute()` and `setAttribute()`.
+
+In order to more modularize our code, let's create a function that does this for us. It would look like this:
+
+```js
+function checkIfAllInputsHaveValue() {
+  const inputs = document.querySelectorAll("input");
+
+  for (const input of inputs) {
+    if (input.value === "") {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
+
+Here we just get a reference to all the inputs, and then loop through them. If one of the inputs have a value that is an empty string, we return false. That means the function is canceled and the value false is returned. If all inputs have value that is not an empty string, the value true will be returned.
+
+This part of the code:
+
+```js
+const inputs = form.querySelectorAll("input");
+let allInputsHaveValue = false;
+
+for (const input of inputs) {
+  if (input.value === "") {
+    allInputsHaveValue = false;
+    break;
+  } else {
+    allInputsHaveValue = true;
+  }
+}
+```
+
+can now be switched out to this:
+
+```js
+const allInputsHaveValue = checkIfAllInputsHaveValue();
+```
+
+and here is the result of the code:
+
+```js
+form.addEventListener("input", function (event) {
+  const allInputsHaveValue = checkIfAllInputsHaveValue();
+
+  if (allInputsHaveValue) {
+    button.removeAttribute("disabled");
+  } else {
+    button.setAttribute("disabled", true);
+  }
+});
+```
+
+A little bit neater.
+
+### 5. Validate the password, it must contain atleast 8 characters.
