@@ -85,3 +85,76 @@ form.addEventListener("click", function (event) {
   input.focus();
 });
 ```
+
+### 4. Make every input mandatory.
+
+In order to solve this we can just add and attribute to all our input fileds. The attribute is called `required`.
+
+```html
+<div>
+  <label class="name-label">Name</label>
+  <input id="name" type="text" placeholder="name" required />
+</div>
+```
+
+This is fine, but we might want to add some more functionlity to this. Let's disabled the button from the beginning so you can't click on it. Done easily, just add the attribute `disabled` to the button.
+
+```html
+<button disabled type="submit">Register</button>
+```
+
+Next step now, is to enable this button again when all the inputs have a value, and remember, av value that is NOT an empty string.
+
+In order to do so, we need to register and event called "input". This event is triggered whenever the value of an input field has changed. We have five of them in our application, and we don't want to register an event for each of those, so let's do like we did before. Let's lift up the event to the form element instead.
+
+```js
+// the form reference is available since the last exercise.
+form.addEventListener("input", function (event) {
+  console.log(event.target);
+  console.log(event.target.value);
+});
+```
+
+Here we just console.log the target and its value, just to see that it works.
+
+Let's collect our thoughts here. We want to enable the submit button sometime, how do we that? We can do a check after each input event if all the input fields have been filled. If that's the case, we enable the button, otherwise we keep it disabled.
+
+In that case we need a reference to all the input fields.
+
+```js
+
+form.addEventListener("input", function (event) {
+  const inputs = form.querySelectorAll("input");
+  console.log(inputs);
+});
+```
+
+Here we can see that we are invoking the querySelectorAll on the form reference, and that's totally fine. It just means that we are narrowing down the search area to be just within the form element.
+
+Let's loop through the inputs and check if they all have values.
+
+```js
+form.addEventListener("input", function (event) {
+  const inputs = form.querySelectorAll("input");
+  let allInputsHaveValue = false;
+
+  for (const input of inputs) {
+    if (input.value === "") {
+      allInputsHaveValue = false;
+      break;
+    } else {
+      allInputsHaveValue = true;
+    }
+  }
+
+  if (allInputsHaveValue) {
+    console.log("Great, all inputs have a value");
+  } else {
+    console.log("One of the inputs don't have a value");
+  }
+});
+```
+
+Here we will console.log a text whether or not all inputs have values.
+
+What we want to do instead is to manipulate the attribute `disabled` on the button element, and to our help we have the methods: `removeAttribute()` and `setAttribute()`.

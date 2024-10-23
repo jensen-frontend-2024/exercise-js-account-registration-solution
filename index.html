@@ -10,30 +10,30 @@
     <form class="form">
       <div>
         <label class="name-label">Name</label>
-        <input id="name" type="text" placeholder="name" />
+        <input id="name" type="text" placeholder="name" required />
       </div>
 
       <div>
         <label>Username</label>
-        <input type="text" placeholder="username" />
+        <input class="username" type="text" placeholder="username" required />
       </div>
 
       <div>
         <label>Email</label>
-        <input type="email" placeholder="email" />
+        <input type="email" placeholder="email" required />
       </div>
 
       <div>
         <label>Password</label>
-        <input type="password" placeholder="password" />
+        <input type="password" placeholder="password" required />
       </div>
 
       <div>
         <label>Confirm Password</label>
-        <input type="password" placeholder="confirm password" />
+        <input type="password" placeholder="confirm password" required />
       </div>
 
-      <button type="submit">Register</button>
+      <button class="button" disabled type="submit">Register</button>
     </form>
 
     <script src="index.js"></script>
