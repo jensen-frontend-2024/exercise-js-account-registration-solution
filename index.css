@@ -1,6 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+/* The * selector targets every element in the entire application, so it's good place for "global styling" maybe, something that you want to apply to every element. It's given the lowest specificity ( 0 ) so it's very easy to override if we want to. */
 * {
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  box-sizing: border-box; /*  Includes the border and padding in the total width of an element. */
+  font-family: "Roboto", sans-serif; /* Sets a default font on every element */
+  margin: 0; /* Cancels all the default margin on all elements if it exists */
+  padding: 0; /* Cancels all the default padding on all elements if it exists */
+}
+
+/* html and :root is the same thing, so you can use either. */
+html {
+    /* Below is something called css-variables, they are reuseble throughout the application. These variables don't just have to be colors, they can be anything really, standard border radius for example. The importan thing is that they need to be defined inside the html-selector. */
+  --background-color-dark: #111827;
+  --background-color-light: #1f2937;
+  --background-color-input: #374151;
+  --background-color-button: #78a44a;
+  --primary-color: #5a97e0;
+  --white: #ffffff;
 }
